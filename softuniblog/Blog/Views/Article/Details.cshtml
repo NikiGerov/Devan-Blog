@@ -19,7 +19,7 @@
         </small>
 
        
-             @Html.ActionLink(string.Format($"Comments ({Model.Comments.Count})"), "ListCommentsOfArticle", "Comment", new { @id = Model.Id }, null)
+             @Html.ActionLink(string.Format($"Comments ({Model.Comments.Count})"), "ListCommentsOnArticle", "Comment", new { @id = Model.Id }, null)
             Seen @Model.ViewCounter times
        
         <footer>

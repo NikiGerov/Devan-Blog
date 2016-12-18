@@ -1,0 +1,53 @@
+﻿@model Blog.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <article>
+        <header>
+            <h2>
+                @Model.Title
+            </h2>
+        </header>
+             <p>
+                @Model.Content
+            </p>
+        <div class="pull-left">
+            @foreach (var tag in Model.Tags)
+            {
+                <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+            }
+        </div>    
+        
+        Seen @Model.ViewCounter times
+      
+         <footer>
+        </footer>
+    </article>
+</div>
+
+<div class="container">
+    <comments>
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="well well-sm">
+                <comment>
+                    <header>
+                        <h4>
+                            @comment.Name
+                            <em class="pull-right">@comment.Email</em>
+                        </h4>
+                    </header>
+                    <p>
+                        @comment.VisitorComment
+                    </p>
+                </comment>
+            </div>
+        }
+        @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+        <hr>
+    </comments>
+</div>
+

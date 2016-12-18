@@ -21,7 +21,7 @@ namespace Blog.Controllers
             return View(comments.ToList());
         }
 
-        public ActionResult ListCommentsOfArticle(int? id)
+        public ActionResult ListCommentsOnArticle(int? id)
         {
             using (var db = new BlogDbContext())
             {
@@ -76,7 +76,7 @@ namespace Blog.Controllers
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("ListCommentsOfArticle", new { id = comment.ArticleId });
+                return RedirectToAction("ListCommentsOnArticle", new { id = comment.ArticleId });
             }
 
             ViewBag.ArticleId = new SelectList(db.Articles, "Id", "Title", comment.ArticleId);

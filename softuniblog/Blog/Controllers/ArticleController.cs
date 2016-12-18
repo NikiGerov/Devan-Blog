@@ -64,7 +64,7 @@ namespace Blog.Controllers
                     .FirstOrDefault();
 
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
-                if (user == null || article.AuthorId != user.Id)
+                if (user == null || article.AuthorId != user.Id) // plus 1 view if user not logged in or user is author
                 {
                     article.ViewCounter += 1;
                     db.Entry(article).State = EntityState.Modified;

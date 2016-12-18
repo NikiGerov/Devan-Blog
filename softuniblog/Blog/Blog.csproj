@@ -298,7 +298,7 @@
     <Content Include="Views\Comment\Details.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
-    <Content Include="Views\Comment\ListCommentsOfArticle.cshtml" />
+    <Content Include="Views\Comment\ListCommentsOnArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
