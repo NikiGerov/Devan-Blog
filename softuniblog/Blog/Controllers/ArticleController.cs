@@ -66,7 +66,7 @@ namespace Blog.Controllers
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
                 if (user == null || article.AuthorId != user.Id)
                 {
-                    
+                    article.ViewCounter += 1;
                     db.Entry(article).State = EntityState.Modified;
                     db.SaveChanges();
                 }

@@ -14,12 +14,16 @@
              <p>
                 @Model.Content
             </p>
-            <div class="pull-left">
-                @foreach (var tag in Model.Tags)
-                {
-                    <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
-                }
-            </div>
+        <div class="pull-left">
+            @foreach (var tag in Model.Tags)
+            {
+                <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+            }
+        </div>
+       
+             Seen @Model.ViewCounter times
+       
+       
             <div class="pull-right">
                 @if (User.IsInRole("Admin") || Model.IsUserAuthor(User.Identity.Name))
                 {
@@ -32,7 +36,7 @@
         </footer>
     </article>
 </div>
-<hr />
+
 <div class="container">
     <comments>
         @foreach (var comment in Model.Comments)

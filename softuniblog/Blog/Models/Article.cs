@@ -26,6 +26,7 @@ namespace Blog.Models
             this.CategoryId = categoryId;
             this.Tags = new HashSet<Tag>();
             this.comments = new HashSet<Comment>();
+            this.ViewCounter = 0;
             ;
 
         }
@@ -46,6 +47,7 @@ namespace Blog.Models
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
+        public int ViewCounter { get; set; }
 
         public virtual Category Category { get; set; }
 
