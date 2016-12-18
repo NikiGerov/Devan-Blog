@@ -19,8 +19,7 @@
         </small>
 
         <small class="info">
-         
-           
+             @Html.ActionLink(string.Format($"Comments ({Model.Comments.Count})"), "ListCommentsOfArticle", "Comment", new { @id = Model.Id }, null)
         </small>
         <footer>
             <div class="pull-left">
@@ -35,7 +34,7 @@
                     @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
-                @Html.ActionLink("Back", "ListArticlesByCategory", "Category", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Back", "ListArticlesOfCategory", "Category", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
             </div>
         </footer>
     </article>

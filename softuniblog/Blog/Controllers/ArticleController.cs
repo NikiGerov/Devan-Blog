@@ -28,8 +28,8 @@ namespace Blog.Controllers
                     .ToList();
                 return View(articles);
             }
-                
-            
+
+
         }
 
         public ActionResult ListUserArticles(string id)
@@ -49,7 +49,7 @@ namespace Blog.Controllers
 
         public ActionResult Details(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -59,12 +59,14 @@ namespace Blog.Controllers
                 var article = db.Articles
                     .Include(a => a.Author)
                     .Include(t => t.Tags)
+                    .Include(c => c.Comments)
                     .Where(a => a.Id == id)
                     .FirstOrDefault();
 
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
                 if (user == null || article.AuthorId != user.Id)
                 {
+                    
                     db.Entry(article).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -73,7 +75,7 @@ namespace Blog.Controllers
                 return View(article);
             }
 
-            
+
         }
         //Get
         [HttpGet]
@@ -86,7 +88,7 @@ namespace Blog.Controllers
                 model.Categories = db.Categories.ToList();
                 return View(model);
             }
-           
+
         }
 
         //Post
@@ -112,7 +114,7 @@ namespace Blog.Controllers
 
                 return RedirectToAction("List");
             }
-                
+
         }
 
 
@@ -121,7 +123,7 @@ namespace Blog.Controllers
         [Authorize]
         public ActionResult Edit(int? id)
         {
-            if(id== null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -195,14 +197,14 @@ namespace Blog.Controllers
                     .FirstOrDefault(m => m.Id == id);
 
                 ViewBag.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
-                if(article == null)
+                if (article == null)
                 {
                     return HttpNotFound();
                 }
 
                 return View(article);
             }
-                
+
         }
 
         [HttpPost]

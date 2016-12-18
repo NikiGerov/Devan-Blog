@@ -19,7 +19,7 @@
                         @article.Content
                     </p>
                     <small class="text-info">
-                       
+                        
                     </small>
 
                     <footer>
@@ -39,3 +39,22 @@
     </div>
 </div>
 <hr />
+
+
+
+@*<div class="container">
+    @foreach (var article in Model)
+    {
+        <article class="col-sm-4">
+            <h1>
+                @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id}, null)
+            </h1>
+            <p>
+                @article.Content
+            </p>
+            <footer>
+                @article.Author.FullName
+            </footer>
+        </article>
+    }
+</div>*@

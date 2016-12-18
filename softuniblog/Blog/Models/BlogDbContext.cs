@@ -20,12 +20,12 @@ namespace Blog.Models
 
         public virtual IDbSet<Tag> Tags { get; set; }
 
-
         public static BlogDbContext Create()
         {
             return new BlogDbContext();
         }
 
-       
+        public System.Data.Entity.DbSet<Blog.Models.Comment> Comments { get; set; }
+
     }
 }
