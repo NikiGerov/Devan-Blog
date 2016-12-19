@@ -146,6 +146,7 @@ namespace Blog.Controllers
                 model.AuthorId = article.AuthorId;
                 model.Title = article.Title;
                 model.Content = article.Content;
+                article.ImgUrl = model.ImgUrl;
                 model.CategoryId = article.CategoryId;
                 model.Categories = db.Categories.ToList();
                 model.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
@@ -170,6 +171,7 @@ namespace Blog.Controllers
                     article.Title = model.Title;
                     article.Content = model.Content;
                     article.CategoryId = model.CategoryId;
+                    article.ImgUrl = model.ImgUrl;
                     article.AuthorId = model.AuthorId;
                     this.SetArticleTags(article, model, db);
 
