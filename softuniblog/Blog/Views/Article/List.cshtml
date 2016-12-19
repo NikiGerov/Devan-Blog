@@ -11,17 +11,24 @@
             <div class="col-sm-6">
                 <article>
                     <header>
-                        <h2>
-                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
-                        </h2>
-                    </header>
-                    <p>
-                        @article.Content
-                    </p>
-                   
-                        Seen @article.ViewCounter times
-                 
+                        @if (article.ImgUrl != null)
+                        {
+                            <div class="text-center">
+                                <a href="@Url.Action("Details", "Article", new { @id = article.Id }, null)">
+                                    <img src="@article.ImgUrl" alt="Incorrect URL" style="width:100%">
+                                </a>
+                            </div>
+                        }
+                        <div class="text-center">
+                            <h2>
 
+                                @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                            </h2>
+                        </div>
+                    </header>
+                        <p>@article.Content</p>
+                    
+                    Seen @article.ViewCounter times
                     <footer>
                         <div class="pull-left">
                             @foreach (var tag in article.Tags)
@@ -32,7 +39,9 @@
                         <small class="author pull-right">
                             --author @article.Author.FullName
                         </small>
+                        <hr>
                     </footer>
+                    <hr>
                 </article>
             </div>
         }
@@ -43,18 +52,18 @@
 
 
 @*<div class="container">
-    @foreach (var article in Model)
-    {
-        <article class="col-sm-4">
-            <h1>
-                @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id}, null)
-            </h1>
-            <p>
-                @article.Content
-            </p>
-            <footer>
-                @article.Author.FullName
-            </footer>
-        </article>
-    }
-</div>*@
+        @foreach (var article in Model)
+        {
+            <article class="col-sm-4">
+                <h1>
+                    @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id}, null)
+                </h1>
+                <p>
+                    @article.Content
+                </p>
+                <footer>
+                    @article.Author.FullName
+                </footer>
+            </article>
+        }
+    </div>*@

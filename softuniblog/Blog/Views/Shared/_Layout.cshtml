@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body background="https://subtlepatterns.com/patterns/sayagata-400px.png">
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,15 +17,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Food Blog Name Here Later", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                    <img src="http://restaurantmenudesignstyle.com/wp-content/uploads/2016/01/sample-of-restaurant-logo.file_bcf11a47-7451-464f-8c4d-c9d3e85e9146.png" width="88" title="title" alt="additional title" />
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+    @RenderBody()
     <div class="container body-content">
-        @RenderBody()
         <footer class="text-center">
             <p>&copy; @DateTime.Now.Year - DEVAN Project </p>
         </footer>

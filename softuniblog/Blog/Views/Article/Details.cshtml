@@ -6,25 +6,33 @@
 
     <article>
         <header>
-            <h2>
-                @Model.Title
-            </h2>
+            <div class="text-center">
+                <h2>
+                    @Model.Title
+                </h2>
+            </div>
         </header>
 
         @if (Model.ImgUrl == null)
         {
             <div class="col-sm-12">
+
                 @Model.Content
+
             </div>
         }
         else
         {
-            <div class="col-sm-6">
-                <img src="@Model.ImgUrl" class="img-rounded" alt="Incorrect URL" style="width:100%">
+            <div class="col-sm-12">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-6">
+                    <img src="@Model.ImgUrl" class="img-rounded" alt="Incorrect URL" style="width:100%">
+                </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="pull-left">
+            <br>
+            <div class="col-sm-12">
+                <div class="pull-right">
                     @foreach (var tag in Model.Tags)
                     {
                         <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
@@ -32,7 +40,6 @@
                     <p>@Model.Content</p>
                 </div>
                 <hr>
-                @Html.ActionLink(string.Format($"Comments ({Model.Comments.Count})"), "ListCommentsOnArticle", "Comment", new { @id = Model.Id }, null)
                 Seen @Model.ViewCounter times
             </div>
         }
@@ -64,7 +71,7 @@
                     @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
-                @Html.ActionLink("Back", "ListArticlesByCategory", "Category", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Back", "List", "Article", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
             </div>
         </footer>
     </article>
