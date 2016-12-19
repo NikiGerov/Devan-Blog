@@ -18,11 +18,12 @@ namespace Blog.Models
             this.comments = new HashSet<Comment>();
         }
 
-        public Article(string authorId, string title, string content, int categoryId)
+        public Article(string authorId, string title, string content, string imgurl, int categoryId)
         {
             this.AuthorId = authorId;
             this.Title = title;
             this.Content = content;
+            this.ImgUrl = imgurl;
             this.CategoryId = categoryId;
             this.Tags = new HashSet<Tag>();
             this.comments = new HashSet<Comment>();
@@ -39,6 +40,8 @@ namespace Blog.Models
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public string ImgUrl { get; set; }
 
         [ForeignKey("Author")]
         public string AuthorId { get; set; }

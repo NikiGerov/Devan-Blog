@@ -2,13 +2,33 @@
 @{
     ViewBag.Title = "ListCategories";
 }
+<img class="mySlides " src="http://themes.dfd.name/ronneby/thirty_sixth/wp-content/uploads/2015/09/4453.jpg" style="width:100%">
+<img class="mySlides" src="http://rnbtheme.com/thirty_sixth/wp-content/uploads/2015/09/meat4.jpg" style="width:100%">
+<img class="mySlides" src="http://themes.dfd.name/ronneby/thirty_sixth/wp-content/uploads/2015/09/meat5.jpg" style="width:100%">
 
-<div class="container">
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 3000); // Change image every 2 seconds
+    }
+</script>
+
+    <div class="container">
         @foreach (var category in Model)
         {
             <h1 class="col-sm-6 text-center">
                 @Html.ActionLink(string.Format($"{category.Name} ({category.Articles.Count})"), "ListArticlesByCategory", "Category", new { @id = category.Id }, null)
             </h1>
         }
-</div>
+    </div>
 

@@ -101,7 +101,7 @@ namespace Blog.Controllers
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
 
-                var article = new Article(user.Id, model.Title, model.Content, model.CategoryId);
+                var article = new Article(user.Id, model.Title, model.Content, model.ImgUrl, model.CategoryId);
                 //article.AuthorId = user.Id;
                 //article.Title = model.Title;
                 //article.Content = model.Content;

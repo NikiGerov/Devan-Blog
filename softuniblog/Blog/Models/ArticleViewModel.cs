@@ -14,6 +14,8 @@ namespace Blog.Models
 
         public string Content { get; set; }
 
+        public string ImgUrl { get; set; }
+
         [Required]
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
