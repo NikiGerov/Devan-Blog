@@ -1,2 +1,13 @@
+softuniblog/.vs
+
 softuniblog/packages
 !softuniblog/packages/empty
+
+softuniblog/Blog/App_Data
+!softuniblog/Blog/App_Data/empty
+
+softuniblog/Blog/bin
+!softuniblog/Blog/bin/empty
+
+softuniblog/Blog/obj
+!softuniblog/Blog/obj/empty
