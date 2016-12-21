@@ -24,7 +24,7 @@ namespace Blog
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrapUnited.css",
                       "~/Content/site.css"));
         }
     }
