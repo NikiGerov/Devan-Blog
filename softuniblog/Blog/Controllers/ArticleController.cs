@@ -47,6 +47,46 @@ namespace Blog.Controllers
 
         }
 
+        public ActionResult Positive(int? id)
+        {
+            using (var db = new BlogDbContext())
+            {
+                var article = db.Articles
+                   .Include(a => a.Author)
+                   .Include(t => t.Tags)
+                   .Include(c => c.Comments)
+                   .Where(a => a.Id == id)
+                   .FirstOrDefault();
+
+                var reqestUrl = this.Request.UrlReferrer.AbsoluteUri;
+                article.Positive += 1;
+                db.Entry(article).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Redirect(reqestUrl);
+            }
+        }
+
+        public ActionResult Negative(int? id)
+        {
+            using (var db = new BlogDbContext())
+            {
+                var article = db.Articles
+                   .Include(a => a.Author)
+                   .Include(t => t.Tags)
+                   .Include(c => c.Comments)
+                   .Where(a => a.Id == id)
+                   .FirstOrDefault();
+
+                var reqestUrl = this.Request.UrlReferrer.AbsoluteUri;
+                article.Negative += 1;
+                db.Entry(article).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Redirect(reqestUrl);
+            }
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -101,7 +141,7 @@ namespace Blog.Controllers
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
 
-                var article = new Article(user.Id, model.Title, model.Content, model.ImgUrl, model.CategoryId);
+                var article = new Article(user.Id, model.Title, model.Content, model.ImgUrl, model.CategoryId, model.Positive, model.Negative);
                 //article.AuthorId = user.Id;
                 //article.Title = model.Title;
                 //article.Content = model.Content;

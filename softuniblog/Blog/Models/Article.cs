@@ -18,13 +18,15 @@ namespace Blog.Models
             this.comments = new HashSet<Comment>();
         }
 
-        public Article(string authorId, string title, string content, string imgurl, int categoryId)
+        public Article(string authorId, string title, string content, string imgurl, int categoryId, int positive, int negative)
         {
             this.AuthorId = authorId;
             this.Title = title;
             this.Content = content;
             this.ImgUrl = imgurl;
             this.CategoryId = categoryId;
+            this.Positive = positive;
+            this.Negative = negative;
             this.Tags = new HashSet<Tag>();
             this.comments = new HashSet<Comment>();
             this.ViewCounter = 0;
@@ -38,6 +40,10 @@ namespace Blog.Models
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
+
+        public int Positive { get; set; }
+
+        public int Negative { get; set; }
 
         public string Content { get; set; }
 

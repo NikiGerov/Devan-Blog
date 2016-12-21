@@ -11,6 +11,11 @@
             <div class="col-sm-6">
                 <article>
                     <header>
+                        <div class="text-center">
+                            <a href="@Url.Action("Details", "Article", new { @id = article.Id }, null)">
+                                <img src="@article.ImgUrl" alt="Incorrect URL" style="width:100%">
+                            </a>
+                        </div>
                         <h2>
                             @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
                         </h2>

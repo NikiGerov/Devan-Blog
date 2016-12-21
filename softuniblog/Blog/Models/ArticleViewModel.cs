@@ -20,6 +20,10 @@ namespace Blog.Models
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
+        public int Positive { get; set; }
+
+        public int Negative { get; set; }
+
         [Required]
         public string AuthorId { get; set; }
 

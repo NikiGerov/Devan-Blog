@@ -24,23 +24,39 @@
         else
         {
             <div class="col-sm-12">
-                <div class="col-sm-3">
+
+                <div class="col-sm-3 text-center">
+                    <a href="@Url.Action("Positive", "Article", new { @id = Model.Id }, null)">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                    </a>
+                    <a href="@Url.Action("Negative", "Article", new { @id = Model.Id }, null)">
+                        <img class="rotate180" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                    </a>
+
+                    <p>Positive/Negative</p> <p>@Model.Positive/@Model.Negative </p>
+                    <br>
+                    <p>Seen @Model.ViewCounter times</p>
+                    <br>
                 </div>
                 <div class="col-sm-6">
-                    <img src="@Model.ImgUrl" class="img-rounded" alt="Incorrect URL" style="width:100%">
+                    <img src="@Model.ImgUrl" class="img-rounded text-center" alt="Incorrect URL" style="width:100%">
                 </div>
             </div>
             <br>
             <div class="col-sm-12">
-                <div class="pull-right">
+                <div class="text-center">
+                    <br>
                     @foreach (var tag in Model.Tags)
                     {
                         <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
                     }
+                </div>
+                <div class="col-sm-12">
+                    <hr>
                     <p>@Model.Content</p>
                 </div>
                 <hr>
-                Seen @Model.ViewCounter times
+
             </div>
         }
         <div class="col-sm-12">
