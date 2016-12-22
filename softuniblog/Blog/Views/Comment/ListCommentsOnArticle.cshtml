@@ -3,51 +3,67 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<br>
 <div class="container">
-    <article>
-        <header>
-            <h2>
-                @Model.Title
-            </h2>
-        </header>
-             <p>
-                @Model.Content
-            </p>
-        <div class="pull-left">
+    <div class="well">
+        <div class="col-sm-3 text-center">
+            <a href="@Url.Action("Positive", "Article", new { @id = Model.Id }, null)">
+                <img style="width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+            </a>
+            <a href="@Url.Action("Negative", "Article", new { @id = Model.Id }, null)">
+                <img style="transform: rotate(180deg); width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+            </a>
+
+            <p>Positive/Negative</p> <p>@Model.Positive/@Model.Negative </p>
+            <br>
+            <p>Seen @Model.ViewCounter times</p>
+            <br>
+        </div>
+        <div class="col-sm-6">
+            <img src="@Model.ImgUrl" class="img-rounded text-center" alt="Incorrect URL" style="width:100%">
+        </div>
+    </div>
+    <br>
+    <div class="col-sm-12">
+        <div class="text-center">
+            <br>
             @foreach (var tag in Model.Tags)
             {
                 <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
             }
-        </div>    
-        
-        Seen @Model.ViewCounter times
-      
-         <footer>
-        </footer>
-    </article>
-</div>
+        </div>
+    </div>
+    <div class="container">
+        @Model.Content
+    </div>
+    <hr>
 
-<div class="container">
-    <comments>
-        @foreach (var comment in Model.Comments)
-        {
-            <div class="well well-sm">
-                <comment>
+    <div class="container">
+        <comments>
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="well">
+
                     <header>
                         <h4>
                             @comment.Name
-                            <em class="pull-right">@comment.Email</em>
+                            @comment.Email
                         </h4>
                     </header>
                     <p>
                         @comment.VisitorComment
                     </p>
-                </comment>
-            </div>
-        }
-        @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
-        <hr>
-    </comments>
+
+                </div>
+            }
+            @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+            @if (User.IsInRole("Admin") || Model.IsUserAuthor(User.Identity.Name))
+            {
+                @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+            }
+            <hr>
+        </comments>
+    </div>
 </div>
 

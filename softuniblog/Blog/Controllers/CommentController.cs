@@ -36,7 +36,7 @@ namespace Blog.Controllers
             }
         }
 
-        // GET: Comment/Details/5
+        // GET: Comment/Details
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -65,8 +65,7 @@ namespace Blog.Controllers
         }
 
         // POST: Comment/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Email,VisitorComment,ArticleId")] Comment comment)
@@ -83,7 +82,7 @@ namespace Blog.Controllers
             return View(comment);
         }
 
-        // GET: Comment/Edit/5
+        // GET: Comment/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,9 +98,7 @@ namespace Blog.Controllers
             return View(comment);
         }
 
-        // POST: Comment/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Comment/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Email,VisitorComment,ArticleId")] Comment comment)
@@ -116,7 +113,7 @@ namespace Blog.Controllers
             return View(comment);
         }
 
-        // GET: Comment/Delete/5
+        // GET: Comment/Delete
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,7 +128,7 @@ namespace Blog.Controllers
             return View(comment);
         }
 
-        // POST: Comment/Delete/5
+        // POST: Comment/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
