@@ -4,8 +4,10 @@
 }
 
 
-<div class="container">
-    <div class="row">
+
+<div class="row">
+    <div class="container">
+        <br>
         @foreach (var article in Model)
         {
             <div class="col-sm-6">
@@ -26,24 +28,32 @@
                             </h2>
                         </div>
                     </header>
-                        <p>@article.Content</p>
-                    
-                    Seen @article.ViewCounter times
-                    <footer>
-                        <div class="pull-left">
-                            @foreach (var tag in article.Tags)
-                            {
-                                <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
-                            }
-                        </div>
-                        <small class="author pull-right">
-                            --author @article.Author.FullName
-                        </small>
-                        <hr>
-                    </footer>
+                    <p>
+                        @if (article.Content.Length > 300)
+                    {
+                        @article.Content.Substring(0, 300)
+                    }
+                    else
+                    {
+                        @article.Content
+                    }
+                </p>
+                <p>Seen @article.ViewCounter times</p>
+                <footer>
+                    <div class="pull-left">
+                        @foreach (var tag in article.Tags)
+                        {
+                            <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                        }
+                    </div>
+                    <small class="author pull-right">
+                        --author @article.Author.FullName
+                    </small>
                     <hr>
-                </article>
-            </div>
+                </footer>
+                <hr>
+            </article>
+        </div>
         }
     </div>
 </div>

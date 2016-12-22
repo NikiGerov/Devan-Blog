@@ -15,35 +15,18 @@
 
         @if (Model.ImgUrl == null)
         {
-            <div class="col-sm-12">
 
-                @Model.Content
+            <div class="col-sm-12 text-center">
+                <a href="@Url.Action("Positive", "Article", new { @id = Model.Id }, null)">
+                    <img style="width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                </a>
+                <a href="@Url.Action("Negative", "Article", new { @id = Model.Id }, null)">
+                    <img style="transform: rotate(180deg); width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                </a>
 
-            </div>
-        }
-        else
-        {
-            <div class="col-sm-12">
-
-                <div class="col-sm-3 text-center">
-                    <a href="@Url.Action("Positive", "Article", new { @id = Model.Id }, null)">
-                        <img style="width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
-                    </a>
-                    <a href="@Url.Action("Negative", "Article", new { @id = Model.Id }, null)">
-                        <img style="transform: rotate(180deg); width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
-                    </a>
-
-                    <p>Positive/Negative</p> <p>@Model.Positive/@Model.Negative </p>
-                    <br>
-                    <p>Seen @Model.ViewCounter times</p>
-                    <br>
-                </div>
-                <div class="col-sm-6">
-                    <img src="@Model.ImgUrl" class="img-rounded text-center" alt="Incorrect URL" style="width:100%">
-                </div>
-            </div>
-            <br>
-            <div class="col-sm-12">
+                <p>Positive/Negative</p> <p>@Model.Positive/@Model.Negative </p>
+                <br>
+                <p>Seen @Model.ViewCounter times</p>
                 <div class="text-center">
                     <br>
                     @foreach (var tag in Model.Tags)
@@ -51,44 +34,79 @@
                         <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
                     }
                 </div>
+                </div>
+                <div class="col-sm-12">
+                    @Model.Content
+                </div>
+                }
+                else
+                {
+                <div class="col-sm-12">
+
+                    <div class="col-sm-3 text-center">
+                        <a href="@Url.Action("Positive", "Article", new { @id = Model.Id }, null)">
+                            <img style="width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                        </a>
+                        <a href="@Url.Action("Negative", "Article", new { @id = Model.Id }, null)">
+                            <img style="transform: rotate(180deg); width: 50px; height: 45px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Facebook_like_thumb.png/1196px-Facebook_like_thumb.png" alt="Like button" style="width:20%">
+                        </a>
+
+                        <p>Positive/Negative</p> <p>@Model.Positive/@Model.Negative </p>
+                        <br>
+                        <p>Seen @Model.ViewCounter times</p>
+                        <br>
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="@Model.ImgUrl" class="img-rounded text-center" alt="Incorrect URL" style="width:100%">
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <br>
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                        }
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                        <p>@Model.Content</p>
+                    </div>
+                    <hr>
+
+                </div>
+                }
                 <div class="col-sm-12">
                     <hr>
-                    <p>@Model.Content</p>
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="well well-sm">
+                            <comment>
+                                <header>
+                                    <h4>
+                                        @comment.Name
+                                        <em class="pull-right">@comment.Email</em>
+                                    </h4>
+                                </header>
+                                <p>
+                                    @comment.VisitorComment
+                                </p>
+                            </comment>
+                        </div>
+                    }
+                    @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
+                    <hr>
                 </div>
-                <hr>
-
-            </div>
-        }
-        <div class="col-sm-12">
-            <hr>
-            @foreach (var comment in Model.Comments)
-            {
-                <div class="well well-sm">
-                    <comment>
-                        <header>
-                            <h4>
-                                @comment.Name
-                                <em class="pull-right">@comment.Email</em>
-                            </h4>
-                        </header>
-                        <p>
-                            @comment.VisitorComment
-                        </p>
-                    </comment>
-                </div>
-            }
-            @Html.ActionLink("Add comment", "Create", "Comment", new { @id = Model.Id }, null)
-            <hr>
-        </div>
-        <footer>
-            <div class="pull-left">
-                @if (User.IsInRole("Admin") || Model.IsUserAuthor(User.Identity.Name))
+                <footer>
+                    <div class="pull-left">
+                        @if (User.IsInRole("Admin") || Model.IsUserAuthor(User.Identity.Name))
                 {
-                    @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
-                    @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
-                }
-                @Html.ActionLink("Back", "List", "Article", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
+                            @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                            @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+                        }
+                        @Html.ActionLink("Back", "List", "Article", new { @id = Model.CategoryId }, new { @class = "btn btn-default btn-xs" })
+                    </div>
+                </footer>
+                </article>
             </div>
-        </footer>
-    </article>
-</div>
